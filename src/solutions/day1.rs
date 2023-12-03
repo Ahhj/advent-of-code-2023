@@ -1,6 +1,5 @@
-use crate::utils::{get_first_char, get_last_char};
+use crate::utils::{get_first_char, get_input_for_day, get_last_char};
 use regex::Regex;
-use std::fs;
 use textwrap::dedent;
 
 pub fn print_solutions_day1() {
@@ -21,7 +20,7 @@ pub fn print_solutions_day1() {
     assert_eq!(example_solution_part1, example_expected_part1);
 
     // Run with real data
-    let input_data_raw: String = get_input_day1();
+    let input_data_raw: String = get_input_for_day(1);
     let solution_part1: u32 = get_solution_day1_part1(&input_data_raw);
     println!("Day 1, part 1: {}", solution_part1);
 
@@ -90,11 +89,4 @@ fn replace_spelled_digits(input_data: &str) -> String {
     }
 
     return prepped_data;
-}
-
-fn get_input_day1() -> String {
-    let filepath: &str = "data/input/day1.txt";
-    let input_data_raw: String = fs::read_to_string(filepath)
-        .expect(&format!("Should have been able to read file {filepath}"));
-    return input_data_raw;
 }
