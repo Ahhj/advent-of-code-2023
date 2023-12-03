@@ -1,11 +1,13 @@
-// Day 1 solutions
+use crate::utils::{get_first_char, get_last_char};
 use regex::Regex;
 use std::fs;
 use textwrap::dedent;
 
 pub fn print_solutions_day1() {
-    // Part 1
-    // Run with example data
+    /*
+    Part 1
+    Run with example data
+    */
     let example_data_raw_part1: String = dedent(
         "
         1abc2
@@ -21,7 +23,7 @@ pub fn print_solutions_day1() {
     // Run with real data
     let input_data_raw: String = get_input_day1();
     let solution_part1: u32 = get_solution_day1_part1(&input_data_raw);
-    print!("Part 1 solution: {}\n", solution_part1);
+    println!("Day 1, part 1: {}", solution_part1);
 
     // Part 2
     // Run with example data
@@ -41,7 +43,7 @@ pub fn print_solutions_day1() {
     assert_eq!(example_expected_part2, example_solution_part2);
 
     let solution_part2: u32 = get_solution_day1_part2(&input_data_raw);
-    print!("Part 2 solution: {}", solution_part2);
+    println!("Day 1, part 2: {}", solution_part2);
 }
 
 fn get_solution_day1_part2(input_data: &str) -> u32 {
@@ -51,10 +53,6 @@ fn get_solution_day1_part2(input_data: &str) -> u32 {
 }
 
 fn get_solution_day1_part1(input_data: &str) -> u32 {
-    // for line in input_data.lines() {
-    //     let cal_val: u32 = get_calibration_value(line);
-    //     println!("{line} {cal_val}");
-    // }
     let cal_vals: Vec<u32> = input_data.lines().map(get_calibration_value).collect();
     let solution: u32 = cal_vals.iter().sum();
     return solution;
@@ -73,14 +71,6 @@ fn get_calibration_value(line: &str) -> u32 {
 
     let cal_val: u32 = (first + &last).parse().unwrap_or(0);
     return cal_val;
-}
-
-fn get_first_char(line: &str) -> char {
-    return line.chars().nth(0).unwrap_or(' ');
-}
-
-fn get_last_char(line: &str) -> char {
-    return line.chars().rev().nth(0).unwrap_or(' ');
 }
 
 fn replace_spelled_digits(input_data: &str) -> String {
