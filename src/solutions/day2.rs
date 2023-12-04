@@ -1,7 +1,4 @@
-use std::collections::HashMap;
-
 use crate::utils::get_input_for_day;
-use fancy_regex::Regex;
 use itertools::Itertools;
 use textwrap::dedent;
 
@@ -92,11 +89,6 @@ fn get_power(game: &Game) -> u32 {
 Parses string input contain the game data to generate a vector of 'Game' structs.
 */
 fn parse_games(input_data_raw: &str) -> Vec<Game> {
-    let game_re = Regex::new(r"(?<=Game\s)(\d+)").unwrap();
-    let blue_re: Regex = Regex::new(r"(\d+)(?=\sblue)").unwrap();
-    let red_re: Regex = Regex::new(r"(\d+) red").unwrap();
-    let green_re: Regex = Regex::new(r"(\d+) green").unwrap();
-
     let mut games: Vec<Game> = vec![];
 
     for line in input_data_raw.lines() {
@@ -115,7 +107,7 @@ fn parse_games(input_data_raw: &str) -> Vec<Game> {
 
         let mut game_sets: Vec<GameSet> = vec![];
 
-        for (set_idx, set) in sets.split(";").enumerate() {
+        for set in sets.split(";") {
             let ball_counts: Vec<BallCount> = set
                 .split(",")
                 .map(|x| x.split_whitespace().collect_tuple().unwrap())
@@ -125,10 +117,7 @@ fn parse_games(input_data_raw: &str) -> Vec<Game> {
                 })
                 .collect();
 
-            game_sets.push(GameSet {
-                set_idx,
-                ball_counts,
-            });
+            game_sets.push(GameSet { ball_counts });
         }
 
         games.push(Game { game_id, game_sets })
@@ -181,7 +170,6 @@ struct BallCount {
 
 #[derive(Debug)]
 struct GameSet {
-    set_idx: usize,
     ball_counts: Vec<BallCount>,
 }
 

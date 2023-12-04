@@ -57,8 +57,10 @@ fn get_solution_day1_part1(input_data: &str) -> u32 {
     return solution;
 }
 
-// Extracts first and last numbers in a string and uses then to create a
-// 2-digit number {first}{last} e.g. '1abc2' -> 12.
+/*
+Extracts first and last numbers in a string and uses then to create a
+2-digit number {first}{last} e.g. '1abc2' -> 12.
+*/
 fn get_calibration_value(line: &str) -> u32 {
     // Get numbers from strings
     let digit_re = Regex::new(r"[A-Za-z]+").unwrap();
