@@ -1,8 +1,7 @@
 use textwrap::dedent;
 
+use crate::helpers::{print_solutions, Example, Solution};
 use crate::utils::get_input_for_day;
-
-use super::helpers::{print_solutions, Example, Solution};
 
 pub fn print_solutions_day5() {
     let day: u32 = 5;
