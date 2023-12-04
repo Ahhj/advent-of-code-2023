@@ -13,8 +13,8 @@ pub fn print_solutions_day5() {
     };
     let solution = Solution {
         input_data: get_input_for_day(day),
-        get_solution_part1: Box::new(get_solution_day5_part1),
-        get_solution_part2: Box::new(get_solution_day5_part2),
+        get_solution_part1: get_solution_day5_part1,
+        get_solution_part2: get_solution_day5_part2,
     };
     print_solutions(day, example, solution);
 }

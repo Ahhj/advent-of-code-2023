@@ -28,6 +28,6 @@ pub(crate) struct Example {
 
 pub(crate) struct Solution {
     pub input_data: String,
-    pub get_solution_part1: Box<dyn Fn(&str) -> u32>,
-    pub get_solution_part2: Box<dyn Fn(&str) -> u32>,
+    pub get_solution_part1: fn(&str) -> u32,
+    pub get_solution_part2: fn(&str) -> u32,
 }
