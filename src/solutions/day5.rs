@@ -101,14 +101,18 @@ fn build_map_of_maps(inputs: &Vec<&str>) -> HashMap<String, Vec<Map>> {
     let mut map_of_maps: HashMap<String, Vec<Map>> = HashMap::new();
 
     for map_input in inputs.iter() {
-        // Extract the values from the map.
-        // Each map consists of a tuple (dest_start, src_start, length).
+        /*
+        Extract the values from the map.
+        Each map consists of a tuple (dest_start, src_start, length).
+        */
         let mut map_parts = map_input.split("\n").collect_vec();
         let map_name = map_parts.remove(0).strip_suffix(" map:").unwrap();
 
-        // Extract the values in the map
-        // Each row of input comprises (dest_start, src_start, length)
-        // Need to split the inputs, parse as ints and then put into a Map object.
+        /*
+        Extract the values in the map
+        Each row of input comprises (dest_start, src_start, length)
+        Need to split the inputs, parse as ints and then put into a Map object.
+        */
         let map_values: Vec<Map> = map_parts
             .iter()
             .map(|x| {
@@ -133,6 +137,8 @@ fn build_map_of_maps(inputs: &Vec<&str>) -> HashMap<String, Vec<Map>> {
 
 fn get_min_location(seed_values: &Vec<(i64, i64)>, map_of_maps: &HashMap<String, Vec<Map>>) -> i64 {
     let mut min_location: i64 = 1000000000;
+
+    // Need to use ordered keys of the map to ensure the correct sequence of mappings applied.
     let map_names = [
         "seed-to-soil",
         "soil-to-fertilizer",
