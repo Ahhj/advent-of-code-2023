@@ -38,7 +38,7 @@ fn get_solution_day4_part1(input_data_raw: &str) -> u32 {
             solution += (2 as u32).pow((winning_numbers.len() - 1) as u32);
         }
     }
-    return solution;
+    solution
 }
 
 fn get_solution_day4_part2(input_data_raw: &str) -> u32 {
@@ -67,10 +67,7 @@ fn get_solution_day4_part2(input_data_raw: &str) -> u32 {
             n_cards.insert(copy_idx, old_val + n_copies);
         }
     }
-
-    let solution = n_cards.values().sum();
-
-    return solution;
+    n_cards.values().sum()
 }
 
 fn get_winning_numbers(line: &str) -> HashSet<u32> {
@@ -90,10 +87,8 @@ fn get_winning_numbers(line: &str) -> HashSet<u32> {
         .collect();
 
     // Winning numbers given by overlaps
-    let winning_numbers: HashSet<u32> = my_numbers_numeric
+    my_numbers_numeric
         .intersection(&their_numbers_numeric)
         .map(|x| x.to_owned())
-        .collect();
-
-    return winning_numbers;
+        .collect()
 }
