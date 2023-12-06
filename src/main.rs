@@ -7,6 +7,7 @@ use solutions::day2::print_solutions_day2;
 use solutions::day3::print_solutions_day3;
 use solutions::day4::print_solutions_day4;
 use solutions::day5::print_solutions_day5;
+use solutions::day6::print_solutions_day6;
 
 fn main() {
     print_solutions_day1();
@@ -14,4 +15,5 @@ fn main() {
     print_solutions_day3();
     print_solutions_day4();
     print_solutions_day5();
+    print_solutions_day6();
 }
