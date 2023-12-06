@@ -109,11 +109,10 @@ trait Strategy {
 
 impl Strategy for Race {
     fn calc_winning_press_times(&self) -> (u32, u32) {
+        // Quadratic formula
         let sqrt_component = (self.accel.powf(2.) * self.time.powf(2.)
             - 4. * self.accel * (self.distance + 1.))
             .sqrt();
-
-        // TODO: quadratic formula
         let tmin = (self.accel * self.time - sqrt_component) / (2. * self.accel);
         let tmax = (self.accel * self.time + sqrt_component) / (2. * self.accel);
         (tmin.ceil() as u32, tmax.floor() as u32)
