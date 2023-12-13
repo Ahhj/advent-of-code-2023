@@ -10,14 +10,17 @@ use solutions::day5::print_solutions_day5;
 use solutions::day6::print_solutions_day6;
 use solutions::day7::print_solutions_day7;
 use solutions::day8::print_solutions_day8;
+use solutions::day9::print_solutions_day9;
 
 fn main() {
-    print_solutions_day1();
-    print_solutions_day2();
-    print_solutions_day3();
-    print_solutions_day4();
-    print_solutions_day5();
-    print_solutions_day6();
-    print_solutions_day7();
-    print_solutions_day8();
+    // TODO: how to run a single day?
+    // print_solutions_day1();
+    // print_solutions_day2();
+    // print_solutions_day3();
+    // print_solutions_day4();
+    // print_solutions_day5();
+    // print_solutions_day6();
+    // print_solutions_day7();
+    // print_solutions_day8();
+    print_solutions_day9();
 }

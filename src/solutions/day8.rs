@@ -5,7 +5,7 @@ use regex::Regex;
 use textwrap::dedent;
 
 use crate::helpers::{Example, Solution};
-use crate::utils::get_input_for_day;
+use crate::utils::{diff, get_input_for_day};
 
 pub fn print_solutions_day8() {
     let day: u32 = 8;
@@ -108,23 +108,6 @@ fn get_nsteps_to_finish(
         .unwrap_or(0);
 
     return result;
-}
-
-/*
-Rolling difference between elements
-NOTE: this can result in overflow errors if say you provide a u32 and the
-difference becomes negative!
-*/
-fn diff<'a, T>(x: &'a Vec<T>) -> Vec<T>
-where
-    &'a T: std::ops::Sub<&'a T, Output = T>,
-{
-    let pairs = x.chunks(2);
-    let collect_vec: Vec<T> = pairs
-        .filter(|pair| pair.len() == 2)
-        .map(|pair: &[T]| pair.get(0).unwrap() - pair.get(1).unwrap())
-        .collect_vec();
-    collect_vec
 }
 
 fn one_step<'a>(

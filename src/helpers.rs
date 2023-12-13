@@ -14,8 +14,6 @@ pub(crate) struct Solution {
 
 impl Solution {
     pub fn print_solutions(self, day: u32, example: Example) {
-        let example_data_raw = dedent("");
-
         // Example part 1
         let example_solution_part1 = (self.get_solution_part1)(&example.input_data);
         assert_eq!(example.expected_part1, example_solution_part1);
