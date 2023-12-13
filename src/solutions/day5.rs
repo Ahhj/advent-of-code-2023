@@ -2,7 +2,7 @@ use hashbrown::HashMap;
 use itertools::Itertools;
 use textwrap::dedent;
 
-use crate::helpers::{print_solutions, Example, Solution};
+use crate::helpers::{Example, Solution};
 use crate::utils::get_input_for_day;
 
 pub fn print_solutions_day5() {
@@ -53,10 +53,10 @@ pub fn print_solutions_day5() {
         get_solution_part1: get_solution_day5_part1,
         get_solution_part2: get_solution_day5_part2,
     };
-    print_solutions(day, example, solution);
+    solution.print_solutions(day, example);
 }
 
-fn get_solution_day5_part1(input_data_raw: &str) -> u32 {
+fn get_solution_day5_part1(input_data_raw: &str) -> u64 {
     let mut inputs: Vec<&str> = input_data_raw.trim().split("\n\n").collect_vec();
     let seeds_input = inputs.remove(0).trim();
     let seed_values: Vec<(i64, i64)> = seeds_input
@@ -69,13 +69,14 @@ fn get_solution_day5_part1(input_data_raw: &str) -> u32 {
 
     let map_of_maps = build_map_of_maps(&inputs);
 
-    // Solution
-    get_min_location(&seed_values, &map_of_maps)
+    let solution: u32 = get_min_location(&seed_values, &map_of_maps)
         .try_into()
-        .unwrap()
+        .unwrap();
+
+    solution as u64
 }
 
-fn get_solution_day5_part2(input_data_raw: &str) -> u32 {
+fn get_solution_day5_part2(input_data_raw: &str) -> u64 {
     let mut inputs: Vec<&str> = input_data_raw.trim().split("\n\n").collect_vec();
     let seeds_input = inputs.remove(0).trim();
 
@@ -91,20 +92,19 @@ fn get_solution_day5_part2(input_data_raw: &str) -> u32 {
 
     let map_of_maps = build_map_of_maps(&inputs);
 
-    // Solution
-    get_min_location(&seed_values, &map_of_maps)
+    let solution: u32 = get_min_location(&seed_values, &map_of_maps)
         .try_into()
-        .unwrap()
+        .unwrap();
+
+    solution as u64
 }
 
 fn build_map_of_maps(inputs: &Vec<&str>) -> HashMap<String, Vec<Map>> {
     let mut map_of_maps: HashMap<String, Vec<Map>> = HashMap::new();
 
     for map_input in inputs.iter() {
-        /*
-        Extract the values from the map.
-        Each map consists of a tuple (dest_start, src_start, length).
-        */
+        // Extract the values from the map.
+        // Each map consists of a tuple (dest_start, src_start, length).
         let mut map_parts = map_input.split("\n").collect_vec();
         let map_name = map_parts.remove(0).strip_suffix(" map:").unwrap();
 

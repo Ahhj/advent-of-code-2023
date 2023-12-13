@@ -3,7 +3,7 @@ use std::cmp::Ordering;
 use std::collections::HashMap;
 use textwrap::dedent;
 
-use crate::helpers::{print_solutions, Example, Solution};
+use crate::helpers::{Example, Solution};
 use crate::utils::get_input_for_day;
 
 pub fn print_solutions_day7() {
@@ -26,10 +26,10 @@ pub fn print_solutions_day7() {
         get_solution_part1,
         get_solution_part2,
     };
-    print_solutions(day, example, solution);
+    solution.print_solutions(day, example);
 }
 
-fn get_solution_part1(input_data_raw: &str) -> u32 {
+fn get_solution_part1(input_data_raw: &str) -> u64 {
     let input_data = input_data_raw.trim().lines();
     let mut hands: Vec<Hand> = input_data
         .map(|line| line.split_whitespace().collect_tuple().unwrap())
@@ -37,15 +37,17 @@ fn get_solution_part1(input_data_raw: &str) -> u32 {
         .collect_vec();
 
     hands.sort_by(Hand::compare);
-    hands
+    let solution: u32 = hands
         .iter()
         .rev()
         .enumerate()
         .map(|(i, hand)| hand.bid * ((i as u32) + 1))
-        .sum()
+        .sum();
+
+    solution as u64
 }
 
-fn get_solution_part2(input_data_raw: &str) -> u32 {
+fn get_solution_part2(input_data_raw: &str) -> u64 {
     // Substitute Jacks (J) for Jokers (X)
     let input_data_prepped = &input_data_raw.trim().replace("J", "X");
     let mut hands: Vec<Hand> = input_data_prepped
@@ -55,12 +57,15 @@ fn get_solution_part2(input_data_raw: &str) -> u32 {
         .collect_vec();
 
     hands.sort_by(Hand::compare);
-    hands
+
+    let solution: u32 = hands
         .iter()
         .rev()
         .enumerate()
         .map(|(i, hand)| hand.bid * ((i as u32) + 1))
-        .sum()
+        .sum();
+
+    solution as u64
 }
 
 #[derive(Debug)]

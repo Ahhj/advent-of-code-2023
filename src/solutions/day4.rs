@@ -2,7 +2,7 @@ use hashbrown::{HashMap, HashSet};
 use itertools::Itertools;
 use textwrap::dedent;
 
-use crate::helpers::{print_solutions, Example, Solution};
+use crate::helpers::{Example, Solution};
 use crate::utils::get_input_for_day;
 
 pub fn print_solutions_day4() {
@@ -26,10 +26,10 @@ pub fn print_solutions_day4() {
         get_solution_part1: get_solution_day4_part1,
         get_solution_part2: get_solution_day4_part2,
     };
-    print_solutions(day, example, solution);
+    solution.print_solutions(day, example);
 }
 
-fn get_solution_day4_part1(input_data_raw: &str) -> u32 {
+fn get_solution_day4_part1(input_data_raw: &str) -> u64 {
     let mut solution: u32 = 0;
 
     for line in input_data_raw.lines() {
@@ -38,10 +38,10 @@ fn get_solution_day4_part1(input_data_raw: &str) -> u32 {
             solution += (2 as u32).pow((winning_numbers.len() - 1) as u32);
         }
     }
-    solution
+    solution as u64
 }
 
-fn get_solution_day4_part2(input_data_raw: &str) -> u32 {
+fn get_solution_day4_part2(input_data_raw: &str) -> u64 {
     let mut n_cards: HashMap<usize, u32> = HashMap::new();
 
     for (idx, line) in input_data_raw.lines().enumerate() {
@@ -67,7 +67,7 @@ fn get_solution_day4_part2(input_data_raw: &str) -> u32 {
             n_cards.insert(copy_idx, old_val + n_copies);
         }
     }
-    n_cards.values().sum()
+    n_cards.values().sum::<u32>() as u64
 }
 
 fn get_winning_numbers(line: &str) -> HashSet<u32> {

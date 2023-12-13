@@ -19,5 +19,5 @@ fn main() {
     print_solutions_day5();
     print_solutions_day6();
     print_solutions_day7();
-    // print_solutions_day8();
+    print_solutions_day8();
 }

@@ -2,7 +2,7 @@ use itertools::Itertools;
 use regex::Regex;
 use textwrap::dedent;
 
-use crate::helpers::{print_solutions, Example, Solution};
+use crate::helpers::{Example, Solution};
 use crate::utils::get_input_for_day;
 
 pub fn print_solutions_day6() {
@@ -22,10 +22,10 @@ pub fn print_solutions_day6() {
         get_solution_part1,
         get_solution_part2,
     };
-    print_solutions(day, example, solution);
+    solution.print_solutions(day, example);
 }
 
-fn get_solution_part1(input_data_raw: &str) -> u32 {
+fn get_solution_part1(input_data_raw: &str) -> u64 {
     // Extract time line
     let times_re = Regex::new(r"Time:\s+(.*)").unwrap();
     let times_inputs = times_re.find(&input_data_raw).unwrap().as_str();
@@ -45,10 +45,10 @@ fn get_solution_part1(input_data_raw: &str) -> u32 {
         .map(|x| x.as_str().parse().unwrap())
         .collect_vec();
 
-    get_solution(times, distances)
+    get_solution(times, distances) as u64
 }
 
-fn get_solution_part2(input_data_raw: &str) -> u32 {
+fn get_solution_part2(input_data_raw: &str) -> u64 {
     // Extract time line
     let times_re = Regex::new(r"Time:\s+(.*)").unwrap();
     let times_inputs = times_re.find(&input_data_raw).unwrap().as_str();
@@ -72,7 +72,7 @@ fn get_solution_part2(input_data_raw: &str) -> u32 {
         .parse()
         .unwrap();
 
-    get_solution(vec![time], vec![distances])
+    get_solution(vec![time], vec![distances]) as u64
 }
 
 fn get_solution(times: Vec<f64>, distances: Vec<f64>) -> u32 {
