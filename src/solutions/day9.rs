@@ -38,6 +38,12 @@ fn get_solution(input_data_raw: &str, reverse: bool) -> u64 {
     for line in input_data_raw.trim().lines() {
         let values_iter = line.split_whitespace().map(|x| x.parse().unwrap());
         let values: Vec<i64>;
+        /*
+        Some weirdness here: because the diff function is implemented in reverse
+        (e.g. x[0] - x[1], x[1] - x[2], ...) it means when reverse is true, we don't
+        reverse the values we pass down, but if reverse is false we don't reverse them.
+        */
+
         if reverse {
             values = values_iter.collect();
         } else {
