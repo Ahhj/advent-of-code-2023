@@ -42,8 +42,13 @@ fn get_solution_part1(input_data_raw: &str) -> u64 {
     forward_path.nodes.len().div_floor(&2) as u64
 }
 
+/*
+First time I've had to use reddit for help this year!
+Thought I'd have to implement a flood fill but didn't want to do that so
+checked for a better way! Glad I did otherwise I wouldn't have finished
+this day.
+*/
 fn get_solution_part2(input_data_raw: &str) -> u64 {
-    // TODO: each '.' should have an odd number of pipes up, down, left, right to count
     let board: HashMap<(usize, usize), char> = get_board(input_data_raw);
     let forward_path = get_loop_path(&board);
 
