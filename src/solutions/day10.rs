@@ -13,15 +13,20 @@ pub fn print_solutions_day10() {
     let example = Example {
         input_data: dedent(
             "
-            ..F7.
-            .FJ|.
-            SJ.L7
-            |F--J
-            LJ...
+            .F----7F7F7F7F-7....
+            .|F--7||||||||FJ....
+            .||.FJ||||||||L7....
+            FJL7L7LJLJ||LJ.L-7..
+            L--J.L7...LJS7F-7L7.
+            ....F-J..F7FJ|L7L7L7
+            ....L7.F7||L7|.L7L7|
+            .....|FJLJ|FJ|F7|.LJ
+            ....FJL-7.||.||||...
+            ....L---J.LJ.LJLJ...
         ",
         ),
-        expected_part1: 8,
-        expected_part2: 0,
+        expected_part1: 70,
+        expected_part2: 8,
     };
     let solution = Solution {
         input_data: get_input_for_day(day),
@@ -39,7 +44,30 @@ fn get_solution_part1(input_data_raw: &str) -> u64 {
 
 fn get_solution_part2(input_data_raw: &str) -> u64 {
     // TODO: each '.' should have an odd number of pipes up, down, left, right to count
-    0
+    let board: HashMap<(usize, usize), char> = get_board(input_data_raw);
+    let forward_path = get_loop_path(&board);
+
+    // https://en.wikipedia.org/wiki/Pick%27s_theorem
+    let mut area: f64 = 0.;
+    for ((x1, y1), (x2, y2)) in forward_path
+        .nodes
+        .iter()
+        .zip(forward_path.nodes.iter().skip(1))
+    {
+        area += determinant(*x1, *x2, *y1, *y2);
+    }
+    area /= 2.;
+
+    // https://en.wikipedia.org/wiki/Shoelace_formula#Example
+    // Minus 1 to boundary because start appears twice.
+    let num_boundary = forward_path.nodes.len() as f64 - 1.;
+    let num_enclosed = area - num_boundary / 2. + 1.;
+
+    num_enclosed as u64
+}
+
+fn determinant(a: usize, b: usize, c: usize, d: usize) -> f64 {
+    ((a * d) as f64) - ((b * c) as f64)
 }
 
 fn get_board(input_data_raw: &str) -> HashMap<(usize, usize), char> {
