@@ -124,7 +124,6 @@ fn build_map_of_maps(inputs: &Vec<&str>) -> HashMap<String, Vec<Map>> {
             .map(|(dest_start, src_start, length)| Map {
                 src_start,
                 src_end: src_start + length,
-                dest_start,
                 dest_end: dest_start + length,
             })
             .sorted_by(|x, y| x.src_start.cmp(&y.src_start))
@@ -218,6 +217,5 @@ fn get_min_location(seed_values: &Vec<(i64, i64)>, map_of_maps: &HashMap<String,
 struct Map {
     src_start: i64,
     src_end: i64,
-    dest_start: i64,
     dest_end: i64,
 }

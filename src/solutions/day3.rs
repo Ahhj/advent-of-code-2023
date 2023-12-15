@@ -153,8 +153,6 @@ fn get_symbols(input_data_raw: &str) -> Vec<Symbol> {
                 dedupe_part_numbers(&mut part_numbers);
 
                 symbols.push(Symbol {
-                    row_idx,
-                    col_idx,
                     value: char,
                     part_numbers,
                 })
@@ -176,8 +174,6 @@ fn dedupe_part_numbers(part_numbers: &mut Vec<Number>) {
 
 #[derive(Debug)]
 struct Symbol {
-    row_idx: usize,
-    col_idx: usize,
     value: char,
     part_numbers: Vec<Number>,
 }
