@@ -23,7 +23,7 @@ pub fn print_solutions_day11() {
         ",
         ),
         expected_part1: 374,
-        expected_part2: 82000210,  // Not actual example because different params used. 
+        expected_part2: 82000210, // Not actual example because different params used.
     };
     let solution = Solution {
         input_data: get_input_for_day(day),
