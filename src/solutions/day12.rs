@@ -77,13 +77,17 @@ fn get_solution_part1(input_data_raw: &str) -> u64 {
             for (index, group) in groups.iter().enumerate() {
                 let groups_left = &groups[0..index];
                 let n_groups_left: usize = groups_left.iter().len();
+                // Count minimum number of spaces to the left required to fit the
+                // groups appearing to the left
                 let min_left: usize = (groups_left.iter().sum::<u64>() as usize) + n_groups_left;
 
                 let groups_right = &groups[index + 1..groups.len()];
                 let n_groups_right: usize = groups_right.iter().len();
+                // Count minimum number of spaces to the right required to fit the
+                // groups appearing to the right
                 let min_right: usize = (groups_right.iter().sum::<u64>() as usize) + n_groups_right;
-                //{{{min_left}},{{max_length}}}
 
+                // Check wheather group matches a given block of '#'s
                 let range_left = format!("{min_left},{max_length}");
                 let range_right = format!("{min_right},{max_length}");
                 let group_re = format!(
@@ -94,6 +98,7 @@ fn get_solution_part1(input_data_raw: &str) -> u64 {
                 let is_match = Regex::new(&group_re).expect("fine").is_match(&new_row);
 
                 if !is_match {
+                    // If no match is found, it means the group is not yet fully populated
                     filtered_groups.push(&group);
                 }
             }
@@ -128,7 +133,10 @@ fn get_solution_part1(input_data_raw: &str) -> u64 {
 
             let n_items = num_questions - sum_filtered_groups - num_missing_periods;
 
-            // Bug is here - problem occurs when items are split up which constrains how big each bucket is
+            // BUG is here - problem occurs when items are split up which constrains how big each bucket is
+            // TODO: match group to segment of ?# (similar regex to above), define pairs of (segment_length, matching_groups).
+            // Then calculate k_buckets and n_items for each, using the logic already defined, and mulitply
+            // all the binomial factors across all the segments
             let k_buckets = num_filtered_groups + 1;
             let result = binomial(n_items + k_buckets - 1, n_items);
             println!("{cleaned_row:?} {filtered_groups:?} {n_items} {k_buckets} {result}");
